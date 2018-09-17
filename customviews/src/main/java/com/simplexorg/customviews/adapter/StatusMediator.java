@@ -8,16 +8,16 @@ public interface StatusMediator {
 
     /**
      * Asks the mediator if object should track the status.
-     * @param obj the object asking.
+     * @param observer the object asking.
      * @return true if object should track status, false otherwise.
      */
-    boolean shouldTrackStatus(Observer obj);
+    boolean shouldTrackStatus(Observer observer);
 
     /**
      * Send request to mediator to signal that current object is
      * going to track status.
      *
-     * @param obj the object requesting.
+     * @param observer the object requesting.
      */
-    void requestToTrackStatus(Observer obj);
+    void requestToTrackStatus(Observer observer);
 }
