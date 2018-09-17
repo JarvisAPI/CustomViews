@@ -28,7 +28,7 @@ public class TrackerImageItemPresenter extends SimpleImageItemPresenter implemen
 
     @Override
     public void onRemoveImage(String imagePath) {
-        if (mMainImageStatusTracker.shouldTrackStatus()) {
+        if (mMainImageStatusTracker.shouldTrackStatus(this)) {
             super.onRemoveImage(imagePath);
         } else {
             for (int i = 0; i < mModel.size(); i++) {
@@ -44,7 +44,7 @@ public class TrackerImageItemPresenter extends SimpleImageItemPresenter implemen
 
     @Override
     public BitmapDecodeTask onImageViewReady(ViewHolderToken token, int position) {
-        if (mMainImageStatusTracker.shouldTrackStatus()) {
+        if (mMainImageStatusTracker.shouldTrackStatus(this)) {
             return super.onImageViewReady(token, position);
         }
         BitmapDecodeTask task = VFactory.getInstance().create(BitmapDecodeTask.class);
@@ -55,12 +55,12 @@ public class TrackerImageItemPresenter extends SimpleImageItemPresenter implemen
 
     @Override
     public boolean onImageItemLongClick(ViewHolderToken token, int position) {
-        if (mMainImageStatusTracker.shouldTrackStatus()) {
+        if (mMainImageStatusTracker.shouldTrackStatus(this)) {
             return super.onImageItemLongClick(token, position);
         }
         mModel.setMainImagePath(mModel.getImagePath(mView.getImagePosition(token)));
         mView.setMainImageIndicator(token);
-        mMainImageStatusTracker.requestToTrackStatus();
+        mMainImageStatusTracker.requestToTrackStatus(this);
         return true;
     }
 
