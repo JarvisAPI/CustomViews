@@ -47,8 +47,6 @@ public interface SimpleImageItemAdapterContract {
 
         void clearMainImageIndicator();
 
-        void clearImageIndicator(ViewHolderToken token);
-
         void showToolTip(ViewToken token);
     }
 

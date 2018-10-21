@@ -1,5 +1,6 @@
 package com.simplexorg.customviews.adapter;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -31,7 +32,7 @@ public class SimpleImageItemView implements SimpleImageItemAdapterContract.View 
 
     @Override
     public void notifyItemChanged(int position) {
-        mAdapter.notifyItemChanged(position);
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -58,12 +59,6 @@ public class SimpleImageItemView implements SimpleImageItemAdapterContract.View 
     }
 
     @Override
-    public void clearImageIndicator(ViewHolderToken token) {
-        ImageItemViewHolder vh = (ImageItemViewHolder) token;
-        vh.mImageItemIndicator.setVisibility(View.GONE);
-    }
-
-    @Override
     public void showToolTip(ViewToken token0) {
         TooltipViewToken token = (TooltipViewToken) token0;
         new SimpleTooltip.Builder(mAdapter.getContext())
@@ -86,6 +81,7 @@ public class SimpleImageItemView implements SimpleImageItemAdapterContract.View 
     }
 
     void bind(ImageItemViewHolder holder, int position) {
+        Log.d("View", "ImageItemViewHolder: " + holder);
         BitmapDecodeTask task = mPresenter.onImageViewReady(holder, position);
         task.setReceiver(holder.mProductImage);
         task.execute();

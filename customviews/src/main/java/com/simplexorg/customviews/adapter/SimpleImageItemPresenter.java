@@ -2,6 +2,7 @@ package com.simplexorg.customviews.adapter;
 
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.simplexorg.customviews.adapter.SimpleImageItemAdapter.ImageItemsListener;
 import com.simplexorg.customviews.adapter.SimpleImageItemAdapter.ViewHolderToken;
@@ -15,7 +16,7 @@ import com.simplexorg.customviews.util.VUtil;
 public class SimpleImageItemPresenter implements SimpleImageItemAdapterContract.Presenter {
     protected View mView;
     protected Model mModel;
-    protected int mDefaultImgSize = 200;
+    int mDefaultImgSize = 200;
     private ImageItemsListener mImageItemsListener;
 
     void setImageItemsListener(ImageItemsListener imageItemsListener) {
@@ -67,6 +68,10 @@ public class SimpleImageItemPresenter implements SimpleImageItemAdapterContract.
 
     @Override
     public void onAddImage(String imagePath) {
+        Log.d("AdapterPresenter", "onAddImage: mModel mainImage: " + mModel.getMainImagePath());
+        Log.d("AdapterPresenter", "onAddImage: mModel ImagePaths: " + mModel.getImagePaths());
+        Log.d("AdapterPresenter", "onAddImage: mModel size" + mModel.size());
+        Log.d("AdapterPresenter", "onAddImage: " + imagePath);
         if (VUtil.getInstance().fileIsImage(imagePath)) {
             mModel.addImagePath(imagePath);
             mView.notifyItemInserted(mModel.size() - 1);
@@ -96,6 +101,7 @@ public class SimpleImageItemPresenter implements SimpleImageItemAdapterContract.
 
     @Override
     public BitmapDecodeTask onImageViewReady(ViewHolderToken token, int position) {
+        Log.d("Presenter", "Token: " + token);
         BitmapDecodeTask task = VFactory.getInstance().create(BitmapDecodeTask.class);
         task.setThumbnailSize(mDefaultImgSize);
         task.setImagePath(mModel.getImagePath(position));
@@ -103,8 +109,6 @@ public class SimpleImageItemPresenter implements SimpleImageItemAdapterContract.
         if (mModel.getMainImagePath() == null) {
             mModel.setMainImagePath(mModel.getImagePath(position));
             mView.setMainImageIndicator(token);
-        } else {
-            mView.clearImageIndicator(token);
         }
         return task;
     }
