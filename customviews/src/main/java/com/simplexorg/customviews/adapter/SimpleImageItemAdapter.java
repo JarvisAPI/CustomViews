@@ -116,7 +116,10 @@ public class SimpleImageItemAdapter extends RecyclerView.Adapter<ImageItemViewHo
         if (mPresenter instanceof Observer) {
             return (Observer) mPresenter;
         }
-        return null;
+
+        return (int event) -> {
+            // / Does nothing
+        };
     }
 
     interface ViewHolderToken {}
