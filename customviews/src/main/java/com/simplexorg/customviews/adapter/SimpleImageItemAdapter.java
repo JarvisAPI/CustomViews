@@ -88,6 +88,10 @@ public class SimpleImageItemAdapter extends RecyclerView.Adapter<ImageItemViewHo
         return mModel.getImagePaths();
     }
 
+    public boolean containsImagePath(String imagePath) {
+        return mModel.containsImagePath(imagePath);
+    }
+
     public void setImageItemsListener(ImageItemsListener imageItemsListener) {
         mPresenter.setImageItemsListener(imageItemsListener);
     }

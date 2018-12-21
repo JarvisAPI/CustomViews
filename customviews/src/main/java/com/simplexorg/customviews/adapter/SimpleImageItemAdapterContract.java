@@ -28,6 +28,8 @@ public interface SimpleImageItemAdapterContract {
         void addImagePath(String imagePath);
 
         int size();
+
+        boolean containsImagePath(String imagePath);
     }
 
     interface View {

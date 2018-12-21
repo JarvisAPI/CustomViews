@@ -60,4 +60,9 @@ public class SimpleImageItemModel implements SimpleImageItemAdapterContract.Mode
     public int size() {
         return mImagePaths.size();
     }
+
+    @Override
+    public boolean containsImagePath(String imagePath) {
+        return mImagePaths.contains(imagePath);
+    }
 }
