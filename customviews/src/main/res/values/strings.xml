@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CustomViews</string>
+    <string name="customviews_app_name">CustomViews</string>
     <string name="customviews_critical_confirm_msg">Are you sure?\nType %s to confirm</string>
     <string name="customviews_confirm">Confirm</string>
     <string name="customviews_cancel">Cancel</string>
