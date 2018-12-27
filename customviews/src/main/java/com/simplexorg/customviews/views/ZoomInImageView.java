@@ -11,6 +11,7 @@ import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.simplexorg.customviews.activity.LocalZoomInImageActivity;
 import com.simplexorg.customviews.activity.ZoomInImageActivity;
 import com.simplexorg.customviews.util.VUtil;
 
@@ -52,7 +53,7 @@ public class ZoomInImageView extends AppCompatImageView {
     private void setInternalClickListener() {
         setOnClickListener((View view) -> {
             if (mResource != 0) {
-                Intent intent = new Intent(getContext(), ZoomInImageActivity.class);
+                Intent intent = new Intent(getContext(), LocalZoomInImageActivity.class);
                 intent.putExtra(ZoomInImageActivity.IMAGE_RES, mResource);
                 if (mActivity != null) {
                     intent.putExtra(VUtil.EXTRA_TRANSITION_NAME, getTransitionName());

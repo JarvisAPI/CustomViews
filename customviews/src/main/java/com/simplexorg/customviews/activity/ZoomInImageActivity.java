@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Fade;
 import android.view.Window;
+import android.widget.ImageView;
 
 import com.github.chrisbanes.photoview.PhotoView;
 import com.simplexorg.customviews.R;
@@ -14,7 +15,7 @@ import com.simplexorg.customviews.util.VUtil;
  * Activity to zoom into image.
  */
 
-public class ZoomInImageActivity extends AppCompatActivity {
+public abstract class ZoomInImageActivity extends AppCompatActivity {
     public static final String IMAGE_RES = "imageRes";
 
     @Override
@@ -29,8 +30,7 @@ public class ZoomInImageActivity extends AppCompatActivity {
 
         PhotoView mPhotoView = findViewById(R.id.customviews_photo_view);
 
-        int imageRes = getIntent().getIntExtra(IMAGE_RES, 0);
-        mPhotoView.setImageResource(imageRes);
+        setupImageView(mPhotoView);
 
         String transitionName = getIntent().getStringExtra(VUtil.EXTRA_TRANSITION_NAME);
 
@@ -45,4 +45,6 @@ public class ZoomInImageActivity extends AppCompatActivity {
             getWindow().setExitTransition(fade);
         }
     }
+
+    abstract protected void setupImageView(ImageView imageView);
 }
