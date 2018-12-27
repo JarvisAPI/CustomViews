@@ -5,6 +5,11 @@ import android.graphics.BitmapFactory;
 import android.graphics.BitmapFactory.Options;
 import android.widget.Toast;
 
+import com.simplexorg.customviews.model.ImageDataHolder;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class VUtil {
     public static final String EXTRA_TRANSITION_NAME = "transition";
     public static final String EXTRA_IMAGE_DATA = "imageData";
@@ -29,6 +34,15 @@ public class VUtil {
             stringBuilder.append(c);
         }
         return stringBuilder.toString();
+    }
+
+    public ArrayList<ImageDataHolder> getImageDataHolderList(List<String> imageUris) {
+        ArrayList<ImageDataHolder> imageDataHolderList = new ArrayList<>();
+        int transitionNameLength = 8;
+        for (String imageUri : imageUris) {
+            imageDataHolderList.add(new ImageDataHolder(imageUri, VUtil.getInstance().genRandomString(transitionNameLength)));
+        }
+        return imageDataHolderList;
     }
 
     public static VUtil getInstance() {

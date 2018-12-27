@@ -3,6 +3,8 @@ package com.simplexorg.customviews.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Locale;
+
 /**
  * Created by william on 2018-12-25.
  * Holds the data required to do transitions properly.
@@ -32,6 +34,11 @@ public class ImageDataHolder implements Parcelable {
     public ImageDataHolder(String imageUri, String transitionName) {
         this.imageUri = imageUri;
         this.transitionName = transitionName;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(Locale.CANADA, "{imageUri: %s, transitionName: %s}", imageUri, transitionName);
     }
 
     @Override

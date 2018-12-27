@@ -32,7 +32,7 @@ import java.util.List;
  */
 
 public class ZoomViewPagerFragment extends Fragment {
-    private static final String TAG = ZoomViewPagerActivity.class.getSimpleName();
+    private static final String TAG = ZoomViewPagerFragment.class.getSimpleName();
 
     public interface ImageLoader {
         void loadImage(String uri, ImageView view);
@@ -49,7 +49,7 @@ public class ZoomViewPagerFragment extends Fragment {
     }
 
     public void setImagesUris(List<String> uris) {
-        ArrayList<ImageDataHolder> imageDataHolderList =  getImageDataHolderList(uris);
+        ArrayList<ImageDataHolder> imageDataHolderList = VUtil.getInstance().getImageDataHolderList(uris);
         mImageAdapter.setImageDataList(imageDataHolderList);
     }
 
@@ -79,16 +79,7 @@ public class ZoomViewPagerFragment extends Fragment {
         mIsTransitioning = false;
     }
 
-    public ArrayList<ImageDataHolder> getImageDataHolderList(List<String> imageUris) {
-        ArrayList<ImageDataHolder> imageDataHolderList = new ArrayList<>();
-        int transitionNameLength = 8;
-        for (String imageUri : imageUris) {
-            imageDataHolderList.add(new ImageDataHolder(imageUri, VUtil.getInstance().genRandomString(transitionNameLength)));
-        }
-        return imageDataHolderList;
-    }
-
-    private void onImageClick(View view, String imageUri) {
+    private void onImageClick(View view) {
         if (getActivity() != null && !mIsTransitioning && mTransitionClass != null) {
             Log.d(TAG, "Fragment onImageClick!!");
             mIsTransitioning = true;

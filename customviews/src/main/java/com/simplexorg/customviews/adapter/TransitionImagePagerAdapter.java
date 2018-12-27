@@ -14,6 +14,7 @@ import java.util.List;
  */
 
 public class TransitionImagePagerAdapter extends ImagePagerAdapter {
+    private static final String TAG = TransitionImagePagerAdapter.class.getSimpleName();
     private List<String> mTransitionNames;
 
     public TransitionImagePagerAdapter(int resourceId) {

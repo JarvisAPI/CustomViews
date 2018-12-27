@@ -24,7 +24,7 @@ public class ImagePagerAdapter extends PagerAdapter {
     private static final String TAG = ImagePagerAdapter.class.getSimpleName();
 
     public interface OnImageClickListener {
-        void onImageClick(View view, String imageUri);
+        void onImageClick(View view);
     }
 
     protected List<String> mImageUris;
@@ -63,10 +63,10 @@ public class ImagePagerAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
+        Log.d(TAG, "instantiateItem");
         View itemView = LayoutInflater.from(container.getContext())
                 .inflate(mResourceId, container, false);
         ImageView imageView = itemView.findViewById(R.id.customviews_image);
-        imageView.setTag(mImageUris.get(position));
         afterInstantiateView(imageView, position);
 
         imageView.setOnClickListener(this::onImageViewClick);
@@ -84,7 +84,7 @@ public class ImagePagerAdapter extends PagerAdapter {
     private void onImageViewClick(View view) {
         if (mOnImageClickListener != null) {
             Log.d(TAG, "Image clicked!");
-            mOnImageClickListener.onImageClick(view, (String) view.getTag());
+            mOnImageClickListener.onImageClick(view);
         }
     }
 
