@@ -26,6 +26,7 @@ public abstract class ZoomInImageActivity extends AppCompatActivity {
             getSupportActionBar().hide();
         }
 
+        postponeEnterTransition();
         setContentView(R.layout.customviews_activity_zoom_in_image);
 
         PhotoView mPhotoView = findViewById(R.id.customviews_photo_view);

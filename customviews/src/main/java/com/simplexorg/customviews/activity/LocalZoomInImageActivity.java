@@ -13,5 +13,6 @@ public class LocalZoomInImageActivity extends ZoomInImageActivity {
     protected void setupImageView(ImageView imageView) {
         int imageRes = getIntent().getIntExtra(IMAGE_RES, 0);
         imageView.setImageResource(imageRes);
+        startPostponedEnterTransition();
     }
 }
