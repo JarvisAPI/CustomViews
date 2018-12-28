@@ -37,12 +37,11 @@ public abstract class ZoomViewPagerActivity extends AppCompatActivity implements
     private boolean mIsImageLoaded = false;
     private boolean mIsViewPagerSetup = false;
 
-    abstract protected void loadImageIntoView(String uri, ImageView view);
-
-    @Override
-    public void loadImage(String uri, ImageView view) {
-        loadImageIntoView(uri, view);
-
+    /**
+     * Subclasses must call this method after images are loaded to ensure proper activity startup.
+     * @param view the view that image is loaded into.
+     */
+    protected void onImageLoaded(ImageView view) {
         if (mTransitionName != null && mTransitionName.equals(view.getTransitionName())) {
             mIsImageLoaded = true;
             if (mIsViewPagerSetup) {
@@ -53,7 +52,6 @@ public abstract class ZoomViewPagerActivity extends AppCompatActivity implements
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d(TAG, "starting");
         super.onCreate(savedInstanceState);
 
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
@@ -67,14 +65,12 @@ public abstract class ZoomViewPagerActivity extends AppCompatActivity implements
         mTransitionName = getIntent().getStringExtra(VUtil.EXTRA_TRANSITION_NAME);
         List<ImageDataHolder> imageDataList = getIntent().getParcelableArrayListExtra(VUtil.EXTRA_IMAGE_DATA);
 
-        TransitionImagePagerAdapter adapter = new TransitionImagePagerAdapter(R.layout.customviews_zoom_in_image_item);
-        adapter.setImageLoader(this);
+        mImageAdapter = new TransitionImagePagerAdapter(R.layout.customviews_zoom_in_image_item);
+        mImageAdapter.setImageLoader(this);
 
         if (imageDataList != null) {
-            adapter.setImageDataList(imageDataList);
+            mImageAdapter.setImageDataList(imageDataList);
         }
-
-        mImageAdapter = adapter;
 
         mViewPager = findViewById(R.id.customviews_view_pager);
         mViewPager.setAdapter(mImageAdapter);
@@ -98,7 +94,7 @@ public abstract class ZoomViewPagerActivity extends AppCompatActivity implements
         };
         mViewPager.addOnPageChangeListener(listener);
 
-        mViewPager.setCurrentItem(adapter.getListPosition(mTransitionName));
+        mViewPager.setCurrentItem(mImageAdapter.getListPosition(mTransitionName));
 
         Fade fade = new Fade();
         fade.excludeTarget(android.R.id.statusBarBackground, true);
